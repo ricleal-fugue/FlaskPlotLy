@@ -27,5 +27,11 @@ def new_rule_violations_burn_down():
     return render_template('plot.html', plot=plot)
 
 
+@app.route('/compliance_summary')
+def compliance_summary():
+    plot = plots.plot_compliance_summary()
+    return render_template('plot.html', plot=plot)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
