@@ -5,11 +5,9 @@ import logging
 import os
 
 import numpy as np
-import pandas as pd
-import plotly.express as px
+import plotly.figure_factory as ff
 import plotly.graph_objs as go
 from plotly.offline import plot
-import plotly.figure_factory as ff
 
 logger = logging.getLogger(__name__)
 
@@ -127,6 +125,37 @@ def plot_new_rule_violations_burn_down():
         title_text="New Rule Violations",
         height=800)
 
+    # Add range slider
+    fig.update_layout(
+        xaxis=dict(
+            rangeselector=dict(
+                buttons=list([
+                    dict(count=1,
+                         label="1d",
+                         step="day",
+                         stepmode="backward"),
+                    dict(count=7,
+                         label="7d",
+                         step="day",
+                         stepmode="backward"),
+                    dict(count=1,
+                         label="1m",
+                         step="month",
+                         stepmode="backward"),
+                    dict(count=6,
+                         label="6m",
+                         step="month",
+                         stepmode="backward"),
+                    dict(step="all")
+                ])
+            ),
+            rangeslider=dict(
+                visible=True
+            ),
+            type="date"
+        )
+    )
+
     plot_div = plot(fig, output_type='div', include_plotlyjs=False)
     return plot_div
 
@@ -160,7 +189,10 @@ def plot_compliance_summary():
         x=headers[1:],
         y=data[:-1, 0].tolist(),
         annotation_text=outer,
-        colorscale='RdYlGn')
+        colorscale='RdYlGn',
+        showscale=True,
+        colorbar=dict(title="%")
+    )
 
     fig.update_layout(
         title_text="Compliance Summary Report - All Environments",
