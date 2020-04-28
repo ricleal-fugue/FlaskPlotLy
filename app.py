@@ -9,57 +9,21 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/plot1d')
-def plot1d():
-    plot = plots.plot1d()
+@app.route('/resources_drifted')
+def resources_drifted():
+    plot = plots.plot_resources_drifted()
     return render_template('plot.html', plot=plot)
 
 
-@app.route('/plot2d')
-def plot2d():
-    plot = plots.plot2d()
+@app.route('/new_rule_violations')
+def new_rule_violations():
+    plot = plots.plot_new_rule_violations()
     return render_template('plot.html', plot=plot)
 
 
-@app.route('/plot3d')
-def plot3d():
-    plot = plots.plot3d()
-    return render_template('plot.html', plot=plot)
-
-
-@app.route('/plot1d_multiple/<int:n>')
-def plot1d_multiple(n):
-    plot = plots.plot1d_multiple(n)
-    return render_template('plot_multiple.html', plot=plot)
-
-
-@app.route('/plot1d_multiple_ajax/<int:n>')
-def plot1d_multiple_ajax(n):
-    plot = plots.plot1d_multiple(n)
-    return plot
-
-
-@app.route('/plotIq')
-def plotIq():
-    plot = plots.plotIq()
-    return render_template('plot_fit.html', plot=plot)
-
-
-@app.route('/plot_live')
-def plot_live():
-    plot = plots.plotLive()
-    return render_template('plot_live.html', plot=plot)
-
-
-@app.route('/plot_live_update')
-def plot_live_update():
-    plot = plots.live_plot_get_data_serialized()
-    return jsonify([plot])
-
-
-@app.route('/plot3d_scatter')
-def plot3d_scatter():
-    plot = plots.plot3D_scatter()
+@app.route('/new_rule_violations_burn_down')
+def new_rule_violations_burn_down():
+    plot = plots.plot_new_rule_violations_burn_down()
     return render_template('plot.html', plot=plot)
 
 
